@@ -141,7 +141,20 @@ export const languages: Record<string, Language> = {
   nestjs: {
     name: "Nesjs",
     iconName: "nestjs"
+  },
+  docker: {
+    name: "Docker",
+    iconName: "docker"
+  },
+  jwt: {
+    name: "JWT",
+    iconName: "jwt"
+  },
+  postgresql: {
+    name: "PostgreSQL",
+    iconName: "postgresql"
   }
+
 
 };
 

@@ -3,9 +3,9 @@ layout: /src/layouts/ProjectLayout.astro
 title: "Proyecto NestJS + React Auth"
 description: ""
 pubDate: "2025-05-04"
-languages: ["nestjs", "ts", "react", "prisma", "PostgreSQL", "Docker", "JWT", "swagger", "Axios", "bcryptjs"]
+languages: ["nestjs", "ts", "react", "prisma", "postgresql", "docker", "jwt", "swagger"]
 image:
-  url: "/images/projects/ArquitecturaLimpia.png"
+  url: "/images/projects/nestjs-icon.png"
   alt: "Captura del proyecto Proteccion-Mayor"
 ---
 
@@ -20,12 +20,12 @@ Este proyecto fue desarrollado como proyecto de estudio para aprender el ecosist
 ## 📁 Estructura del Proyecto
 
 
-proyecto_nest/
-├── backend/           # API NestJS con autenticación JWT
-├── frontend/          # Aplicación React con TypeScript
-├── .env              # Variables de entorno compartidas
-├── .gitignore        # Archivos ignorados por Git
-└── README.md         # Este archivo
+- proyecto_nest/
+    - backend/           # API NestJS con autenticación JWT
+    - frontend/          # Aplicación React con TypeScript
+    - env              # Variables de entorno compartidas
+    - .gitignore        # Archivos ignorados por Git
+    - README.md         # Este archivo
 
 
 ## 🚀 Cómo ejecutar el proyecto
@@ -37,18 +37,19 @@ proyecto_nest/
 - pnpm (recomendado) o npm
 
 ### 1. Configurar el Backend (NestJS)
-bash
-cd backend
-pnpm install
-docker-compose up -d  # Inicia PostgreSQL
-pnpm run start:dev    # Servidor en http://localhost:3000
+
+- bash
+- cd backend
+- pnpm install
+- docker-compose up -d  # Inicia PostgreSQL
+- pnpm run start:dev    # Servidor en http://localhost:3000
 
 
 ### 2. Configurar el Frontend (React)
-bash
-cd frontend/auth-frontend
-npm install
-npm start  # Servidor en http://localhost:3001
+- bash
+- cd frontend/auth-frontend
+- npm install
+- npm start  # Servidor en http://localhost:3001
 
 
 ## 🔐 Características del Sistema
@@ -126,7 +127,6 @@ npm start  # Servidor en http://localhost:3001
 
 - **React** - Librería de UI
 - **TypeScript** - Tipado estático
-- **Axios** - Cliente HTTP
 - **Context API** - Manejo de estado y sesión
 - **Persistencia en localStorage** - Guardado de tokens para sesión
 - **React Router** - Navegación en la aplicación
@@ -149,3 +149,7 @@ npm start  # Servidor en http://localhost:3001
 - ✅ Validaciones implementadas
 - ✅ Manejo de errores
 - ✅ Persistencia de sesión
+
+## 🌐 Repositorio
+
+👉 [Ver repositorio](https://github.com/BenjaminEspinozaFK/proyecto_nest) 
