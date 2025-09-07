@@ -137,6 +137,10 @@ export const languages: Record<string, Language> = {
   swagger: {
     name: "Swagger",
     iconName: "swagger"
+  },
+  nestjs: {
+    name: "Nesjs",
+    iconName: "nestjs"
   }
 
 };
