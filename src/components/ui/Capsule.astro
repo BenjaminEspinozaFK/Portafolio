@@ -47,11 +47,10 @@ const getIconContainerClasses = () => {
 
 {
   linkEnabled ? (
-    <a
-      class="cursor-pointer"
-      href={`/blog/techs/${lang}`}
-      aria-label={`View articles about ${selectedLanguage.name}`}
-      role="link"
+    <span
+      class="cursor-default"
+      aria-label={`Technology: ${selectedLanguage.name}`}
+      role="text"
     >
       <span
         class={getContainerClasses()}
@@ -67,7 +66,7 @@ const getIconContainerClasses = () => {
         </div>
         {selectedLanguage.name}
       </span>
-    </a>
+    </span>
   ) : (
     <span
       class={`${getContainerClasses()} cursor-default`}

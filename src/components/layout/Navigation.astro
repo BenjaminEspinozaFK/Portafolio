@@ -11,11 +11,6 @@ const { items = [] }: { items: (keyof typeof menu)[] } = Astro.props as {
 
 const menu = {
   about: { name: "About Me", path: "/about-me" },
-  blog: {
-    name: "Blog",
-    path: "/blog/",
-    dropdown: [{ name: "All Posts", path: "/blog/posts/" }],
-  },
   home: { name: "Home", path: "/#home" },
   projects: { name: "Projects", path: "/#projects" },
 };
