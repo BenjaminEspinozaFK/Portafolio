@@ -153,7 +153,31 @@ export const languages: Record<string, Language> = {
   postgresql: {
     name: "PostgreSQL",
     iconName: "postgresql"
-  }
+  },
+  vite: {
+    name: "Vite.js",
+    iconName: "vite"
+  },
+  svelte: {
+    name: "Svelte",
+    iconName: "svelte"
+  },
+  rust: {
+    name: "Rust",
+    iconName: "rust"
+  },
+  linux: {
+    name: "Linux",
+    iconName: "linux"
+  },
+  github: {
+    name: "Github",
+    iconName: "github"
+  },
+  pnpm: {
+    name: "Pnpm",
+    iconName: "pnpm"
+  },
 
 
 };
