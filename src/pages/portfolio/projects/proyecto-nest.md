@@ -1,7 +1,7 @@
 ---
 layout: /src/layouts/ProjectLayout.astro
 title: "Proyecto NestJS + React Auth"
-description: ""
+description: "Proyecto completamente desarrollado con el fin de aprender NestJS y React, implementando autenticación JWT."
 pubDate: "2025-05-04"
 languages: ["nestjs", "ts", "react", "prisma", "postgresql", "docker", "jwt", "swagger"]
 image:
