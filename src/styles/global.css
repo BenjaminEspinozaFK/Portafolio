@@ -5,71 +5,78 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-montserrat: 'Montserrat', sans-serif;
-  --font-roboto: 'Roboto', sans-serif;
-  --font-opensans: 'Open Sans', sans-serif;
-  --color-blacktext: #171717;
-  --color-mint-50: #ecfdf5;
-  --color-mint-100: #d0fbe5;
-  --color-mint-200: #a4f4cf;
-  --color-mint-300: #6ce9b7;
-  --color-mint-400: #31d69a;
-  --color-mint-500: #0dbc82;
-  --color-mint-600: #03986a;
-  --color-mint-700: #027a58;
-  --color-mint-800: #056047;
-  --color-mint-900: #054f3c;
-  --color-mint-950: #012d22;
+	--font-montserrat: 'Montserrat', sans-serif;
+	--font-roboto: 'Roboto', sans-serif;
+	--font-opensans: 'Open Sans', sans-serif;
+	--color-blacktext: #171717;
+	/* Paleta principal - tonos azul oscuro/slate en lugar de verde */
+	--color-mint-50: #f1f5f9;
+	--color-mint-100: #e2e8f0;
+	--color-mint-200: #cbd5e1;
+	--color-mint-300: #94a3b8;
+	--color-mint-400: #64748b;
+	--color-mint-500: #475569;
+	--color-mint-600: #334155;
+	--color-mint-700: #1e293b;
+	--color-mint-800: #0f172a;
+	--color-mint-900: #020617;
+	--color-mint-950: #010314;
 
-  --color-riptide-50: #f0fdfa;
-  --color-riptide-100: #cbfcf1;
-  --color-riptide-200: #96f7e4;
-  --color-riptide-300: #5cecd5;
-  --color-riptide-400: #2bd6c1;
-  --color-riptide-500: #12baa8;
-  --color-riptide-600: #0b9689;
-  --color-riptide-700: #0e776f;
-  --color-riptide-800: #105f5a;
-  --color-riptide-900: #124f4b;
-  --color-riptide-950: #03302f;
+	/* Paleta de acento - tonos púrpura/azul oscuro */
+	--color-riptide-50: #f8fafc;
+	--color-riptide-100: #f1f5f9;
+	--color-riptide-200: #e2e8f0;
+	--color-riptide-300: #8b5cf6;
+	--color-riptide-400: #7c3aed;
+	--color-riptide-500: #6d28d9;
+	--color-riptide-600: #5b21b6;
+	--color-riptide-700: #4c1d95;
+	--color-riptide-800: #3730a3;
+	--color-riptide-900: #312e81;
+	--color-riptide-950: #1e1b4b;
 
-  --animate-rotate: rotate 10s linear infinite;
+	--animate-rotate: rotate 10s linear infinite;
 
-  --animate-rotate-border: border-rotate 3s linear infinite;
-  @keyframes border-rotate {
-    to {
-      --border-angle: 360deg;
-    }
-  }
+	--animate-rotate-border: border-rotate 3s linear infinite;
+
+	@keyframes border-rotate {
+		to {
+			--border-angle: 360deg;
+		}
+	}
 }
 
-@property --border-angle{
-	  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
+@property --border-angle {
+	syntax: "<angle>";
+	inherits: false;
+	initial-value: 0deg;
 }
 
 ::selection {
 	@apply text-white bg-mint-500;
-	
-  }
-*::-webkit-scrollbar-thumb{
+
+}
+
+*::-webkit-scrollbar-thumb {
 	border-radius: 20px;
 }
-.dark *{
-	scrollbar-color: #6ce9b7 #012d22;
+
+.dark * {
+	scrollbar-color: #94a3b8 #1e293b;
 	scrollbar-width: thin;
 }
- *{
-	scrollbar-color: #6ce9b7 #d0fbe5;
+
+* {
+	scrollbar-color: #94a3b8 #e2e8f0;
 	scrollbar-width: thin;
 	box-sizing: border-box;
 }
 
 
-pre, .dark pre {
+pre,
+.dark pre {
 	scrollbar-color: #686868 #424242;
-	scrollbar-width:initial;
+	scrollbar-width: initial;
 }
 
 @keyframes rotate {
@@ -82,24 +89,30 @@ pre, .dark pre {
 	}
 }
 
-a.inline-block.leading-5.pl-12{
+a.inline-block.leading-5.pl-12 {
 	@apply text-sm;
 }
-#toc-list a[href="#"]{
-	@apply  font-bold dark:text-white text-blacktext;
+
+#toc-list a[href="#"] {
+	@apply font-bold dark:text-white text-blacktext;
 }
+
 .markdown h2 {
-	@apply dark:text-white text-blacktext  text-3xl font-bold  mt-16 mb-10;
+	@apply dark:text-white text-blacktext text-3xl font-bold mt-16 mb-10;
 }
+
 .markdown h3 {
 	@apply text-2xl font-bold dark:text-white text-blacktext mt-6 mb-4;
 }
+
 .markdown h4 {
-	@apply text-xl dark:text-white text-blacktext font-bold  mt-6 mb-4;
+	@apply text-xl dark:text-white text-blacktext font-bold mt-6 mb-4;
 }
+
 .markdown h5 {
 	@apply text-lg font-bold dark:text-white text-blacktext mt-6 mb-4;
 }
+
 .markdown h6 {
 	@apply text-base font-bold dark:text-white text-blacktext mt-6 mb-4;
 }
@@ -110,21 +123,24 @@ a.inline-block.leading-5.pl-12{
 }
 
 .markdown a {
-	@apply text-xl max-md:text-lg font-semibold dark:text-riptide-300! text-mint-500! underline hover:text-riptide-400! transition-all;
+	@apply text-xl max-md:text-lg font-semibold dark:text-riptide-300 text-mint-500 underline hover:text-riptide-400 transition-all;
 }
 
-.markdown ol{
+.markdown ol {
 	@apply list-decimal mb-8;
 }
-.markdown ul{
+
+.markdown ul {
 	@apply list-disc mb-8;
 }
-.markdown ul, .markdown ol{
-	@apply text-xl dark:text-gray-200 text-blacktext  max-md:text-lg  pl-4 pb-0;
+
+.markdown ul,
+.markdown ol {
+	@apply text-xl dark:text-gray-200 text-blacktext max-md:text-lg pl-4 pb-0;
 }
 
 .markdown li {
-	@apply text-xl dark:text-gray-200 text-blacktext  max-md:text-lg py-1;
+	@apply text-xl dark:text-gray-200 text-blacktext max-md:text-lg py-1;
 }
 
 .markdown hr {
@@ -145,64 +161,70 @@ a.inline-block.leading-5.pl-12{
 }
 
 .markdown pre {
-	@apply  w-full h-full px-8 py-12   ;
-} 
+	@apply w-full h-full px-8 py-12;
+}
 
-.markdown strong{
+.markdown strong {
 	@apply font-bold;
 }
+
 .code-block-efe {
-	@apply  w-full rounded-lg h-auto overflow-hidden my-8 ;
+	@apply w-full rounded-lg h-auto overflow-hidden my-8;
 }
-.copy-code svg{
+
+.copy-code svg {
 	@apply size-5;
 }
-.copy-code{
-	@apply absolute  text-slate-400 text-xs cursor-pointer bg-slate-600/50 border hover:bg-transparent border-slate-500 p-2.5 rounded-md top-4 right-4 flex transition-all duration-300 max-md:opacity-100 md:opacity-0 group-hover:opacity-100 items-center justify-center;
+
+.copy-code {
+	@apply absolute text-slate-400 text-xs cursor-pointer bg-slate-600/50 border hover:bg-transparent border-slate-500 p-2.5 rounded-md top-4 right-4 flex transition-all duration-300 max-md:opacity-100 md:opacity-0 group-hover:opacity-100 items-center justify-center;
 }
-  
+
 .contains-task-list {
 	@apply space-y-2;
-  }	
-  
-  .task-list-item {
+}
+
+.task-list-item {
 	@apply flex items-center gap-4;
-  }
-  
-  .task-list-item input[type="checkbox"] {
+}
+
+.task-list-item input[type="checkbox"] {
 	@apply w-5 h-5 accent-mint-300;
-  }
-  
-  .task-list-item input[type="checkbox"]:checked + span {
+}
+
+.task-list-item input[type="checkbox"]:checked+span {
 	@apply line-through text-mint-600;
-  }
-  
-  .task-list-item span {
+}
+
+.task-list-item span {
 	@apply text-gray-800;
-  }
+}
 
 .expanded {
-	@apply transition-all duration-700 w-full flex! flex-col! left-0 top-full mt-4 absolute shadow-xl  dark:text-zinc-300 bg-linear-to-t from-white to-white/90 dark:from-zinc-950 dark:to-zinc-950/80 bg-clip-padding backdrop-filter backdrop-blur backdrop-saturate-100 backdrop-contrast-100;
+	@apply transition-all duration-700 w-full flex flex-col left-0 top-full mt-4 absolute shadow-xl dark:text-zinc-300 bg-linear-to-t from-white to-white/90 dark:from-zinc-950 dark:to-zinc-950/80 bg-clip-padding backdrop-filter backdrop-blur backdrop-saturate-100 backdrop-contrast-100;
 }
 
 
 
 .hamburger-icon {
 	display: none;
-  }
-  
-  .hamburger .bars-icon {
-	display: block;  /* Show 'bars' icon by default */
-  }
-  
-  .hamburger.active .bars-icon {
-	display: none;  /* Hide 'bars' icon when .active is present */
-  }
-  
-  .hamburger.active .xmark-icon {
-	display: block;  /* Show 'xmark' icon when .active is present */
-  }
-  
+}
+
+.hamburger .bars-icon {
+	display: block;
+	/* Show 'bars' icon by default */
+}
+
+.hamburger.active .bars-icon {
+	display: none;
+	/* Hide 'bars' icon when .active is present */
+}
+
+.hamburger.active .xmark-icon {
+	display: block;
+	/* Show 'xmark' icon when .active is present */
+}
+
 
 /* Navigation bar styles */
 .hamburger {
@@ -212,7 +234,7 @@ a.inline-block.leading-5.pl-12{
 
 .nav-links {
 	display: none;
-	
+
 }
 
 
@@ -235,7 +257,7 @@ a.inline-block.leading-5.pl-12{
 	display: block;
 	width: 400px;
 	height: 400px;
-	background: #31d69a40;
+	background: #47556940;
 	bottom: -400px;
 	right: -300px;
 	position: fixed;
@@ -247,7 +269,7 @@ a.inline-block.leading-5.pl-12{
 
 
 .blur-circle {
-	background-color: rgba(87, 253, 228, 0.29);
+	background-color: rgba(100, 116, 139, 0.29);
 	position: absolute;
 	width: 200px;
 	height: 200px;
@@ -264,7 +286,7 @@ a.inline-block.leading-5.pl-12{
 	display: block;
 	width: 500px;
 	height: 500px;
-	background: #50fd8f25 !important;
+	background: #47556925;
 	bottom: -150px;
 	right: -150px;
 	position: absolute;
@@ -272,4 +294,257 @@ a.inline-block.leading-5.pl-12{
 	border-radius: 50%;
 	filter: blur(10px);
 
+}
+
+/* Utility mappings to map legacy utility names to CSS variables
+   This ensures classes like `from-mint-300`, `to-mint-50`, `text-mint-500`,
+   `border-mint-100`, etc. use the values defined in @theme above.
+*/
+
+/* Gradient variables for mint */
+.from-mint-50 {
+	--tw-gradient-from: var(--color-mint-50);
+}
+
+.from-mint-100 {
+	--tw-gradient-from: var(--color-mint-100);
+}
+
+.from-mint-200 {
+	--tw-gradient-from: var(--color-mint-200);
+}
+
+.from-mint-300 {
+	--tw-gradient-from: var(--color-mint-300);
+}
+
+.from-mint-400 {
+	--tw-gradient-from: var(--color-mint-400);
+}
+
+.from-mint-500 {
+	--tw-gradient-from: var(--color-mint-500);
+}
+
+.from-mint-600 {
+	--tw-gradient-from: var(--color-mint-600);
+}
+
+.from-mint-700 {
+	--tw-gradient-from: var(--color-mint-700);
+}
+
+.from-mint-800 {
+	--tw-gradient-from: var(--color-mint-800);
+}
+
+.from-mint-900 {
+	--tw-gradient-from: var(--color-mint-900);
+}
+
+.from-mint-950 {
+	--tw-gradient-from: var(--color-mint-950);
+}
+
+.to-mint-50 {
+	--tw-gradient-to: var(--color-mint-50);
+}
+
+.to-mint-100 {
+	--tw-gradient-to: var(--color-mint-100);
+}
+
+.to-mint-200 {
+	--tw-gradient-to: var(--color-mint-200);
+}
+
+.to-mint-300 {
+	--tw-gradient-to: var(--color-mint-300);
+}
+
+.to-mint-400 {
+	--tw-gradient-to: var(--color-mint-400);
+}
+
+.to-mint-500 {
+	--tw-gradient-to: var(--color-mint-500);
+}
+
+.to-mint-600 {
+	--tw-gradient-to: var(--color-mint-600);
+}
+
+.to-mint-700 {
+	--tw-gradient-to: var(--color-mint-700);
+}
+
+.to-mint-800 {
+	--tw-gradient-to: var(--color-mint-800);
+}
+
+.to-mint-900 {
+	--tw-gradient-to: var(--color-mint-900);
+}
+
+.to-mint-950 {
+	--tw-gradient-to: var(--color-mint-950);
+}
+
+/* Text, background and border mappings */
+.text-mint-50 {
+	color: var(--color-mint-50);
+}
+
+.text-mint-100 {
+	color: var(--color-mint-100);
+}
+
+.text-mint-200 {
+	color: var(--color-mint-200);
+}
+
+.text-mint-300 {
+	color: var(--color-mint-300);
+}
+
+.text-mint-400 {
+	color: var(--color-mint-400);
+}
+
+.text-mint-500 {
+	color: var(--color-mint-500);
+}
+
+.text-mint-600 {
+	color: var(--color-mint-600);
+}
+
+.text-mint-700 {
+	color: var(--color-mint-700);
+}
+
+.text-mint-800 {
+	color: var(--color-mint-800);
+}
+
+.text-mint-900 {
+	color: var(--color-mint-900);
+}
+
+.text-mint-950 {
+	color: var(--color-mint-950);
+}
+
+.bg-mint-50 {
+	background-color: var(--color-mint-50);
+}
+
+.bg-mint-100 {
+	background-color: var(--color-mint-100);
+}
+
+.bg-mint-200 {
+	background-color: var(--color-mint-200);
+}
+
+.bg-mint-300 {
+	background-color: var(--color-mint-300);
+}
+
+.bg-mint-400 {
+	background-color: var(--color-mint-400);
+}
+
+.bg-mint-500 {
+	background-color: var(--color-mint-500);
+}
+
+.bg-mint-600 {
+	background-color: var(--color-mint-600);
+}
+
+.bg-mint-700 {
+	background-color: var(--color-mint-700);
+}
+
+.bg-mint-800 {
+	background-color: var(--color-mint-800);
+}
+
+.bg-mint-900 {
+	background-color: var(--color-mint-900);
+}
+
+.bg-mint-950 {
+	background-color: var(--color-mint-950);
+}
+
+.border-mint-50 {
+	border-color: var(--color-mint-50);
+}
+
+.border-mint-100 {
+	border-color: var(--color-mint-100);
+}
+
+.border-mint-200 {
+	border-color: var(--color-mint-200);
+}
+
+.border-mint-300 {
+	border-color: var(--color-mint-300);
+}
+
+.border-mint-400 {
+	border-color: var(--color-mint-400);
+}
+
+.border-mint-500 {
+	border-color: var(--color-mint-500);
+}
+
+.border-mint-600 {
+	border-color: var(--color-mint-600);
+}
+
+.border-mint-700 {
+	border-color: var(--color-mint-700);
+}
+
+.border-mint-800 {
+	border-color: var(--color-mint-800);
+}
+
+.border-mint-900 {
+	border-color: var(--color-mint-900);
+}
+
+.border-mint-950 {
+	border-color: var(--color-mint-950);
+}
+
+/* Riptide accent mappings */
+.from-riptide-100 {
+	--tw-gradient-from: var(--color-riptide-100);
+}
+
+.to-riptide-100 {
+	--tw-gradient-to: var(--color-riptide-100);
+}
+
+.text-riptide-300 {
+	color: var(--color-riptide-300);
+}
+
+.text-riptide-400 {
+	color: var(--color-riptide-400);
+}
+
+.text-riptide-500 {
+	color: var(--color-riptide-500);
+}
+
+/* Accent utilities for checkbox accent */
+.accent-mint-300 {
+	accent-color: var(--color-mint-300);
 }
