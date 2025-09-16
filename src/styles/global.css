@@ -257,7 +257,7 @@ a.inline-block.leading-5.pl-12 {
 	display: block;
 	width: 400px;
 	height: 400px;
-	background: #47556940;
+	background: #31d69a40;
 	bottom: -400px;
 	right: -300px;
 	position: fixed;
@@ -269,7 +269,7 @@ a.inline-block.leading-5.pl-12 {
 
 
 .blur-circle {
-	background-color: rgba(100, 116, 139, 0.29);
+	background-color: rgba(87, 253, 228, 0.29);
 	position: absolute;
 	width: 200px;
 	height: 200px;
@@ -286,7 +286,7 @@ a.inline-block.leading-5.pl-12 {
 	display: block;
 	width: 500px;
 	height: 500px;
-	background: #47556925;
+	background: #50fd8f25 !important;
 	bottom: -150px;
 	right: -150px;
 	position: absolute;
@@ -294,257 +294,4 @@ a.inline-block.leading-5.pl-12 {
 	border-radius: 50%;
 	filter: blur(10px);
 
-}
-
-/* Utility mappings to map legacy utility names to CSS variables
-   This ensures classes like `from-mint-300`, `to-mint-50`, `text-mint-500`,
-   `border-mint-100`, etc. use the values defined in @theme above.
-*/
-
-/* Gradient variables for mint */
-.from-mint-50 {
-	--tw-gradient-from: var(--color-mint-50);
-}
-
-.from-mint-100 {
-	--tw-gradient-from: var(--color-mint-100);
-}
-
-.from-mint-200 {
-	--tw-gradient-from: var(--color-mint-200);
-}
-
-.from-mint-300 {
-	--tw-gradient-from: var(--color-mint-300);
-}
-
-.from-mint-400 {
-	--tw-gradient-from: var(--color-mint-400);
-}
-
-.from-mint-500 {
-	--tw-gradient-from: var(--color-mint-500);
-}
-
-.from-mint-600 {
-	--tw-gradient-from: var(--color-mint-600);
-}
-
-.from-mint-700 {
-	--tw-gradient-from: var(--color-mint-700);
-}
-
-.from-mint-800 {
-	--tw-gradient-from: var(--color-mint-800);
-}
-
-.from-mint-900 {
-	--tw-gradient-from: var(--color-mint-900);
-}
-
-.from-mint-950 {
-	--tw-gradient-from: var(--color-mint-950);
-}
-
-.to-mint-50 {
-	--tw-gradient-to: var(--color-mint-50);
-}
-
-.to-mint-100 {
-	--tw-gradient-to: var(--color-mint-100);
-}
-
-.to-mint-200 {
-	--tw-gradient-to: var(--color-mint-200);
-}
-
-.to-mint-300 {
-	--tw-gradient-to: var(--color-mint-300);
-}
-
-.to-mint-400 {
-	--tw-gradient-to: var(--color-mint-400);
-}
-
-.to-mint-500 {
-	--tw-gradient-to: var(--color-mint-500);
-}
-
-.to-mint-600 {
-	--tw-gradient-to: var(--color-mint-600);
-}
-
-.to-mint-700 {
-	--tw-gradient-to: var(--color-mint-700);
-}
-
-.to-mint-800 {
-	--tw-gradient-to: var(--color-mint-800);
-}
-
-.to-mint-900 {
-	--tw-gradient-to: var(--color-mint-900);
-}
-
-.to-mint-950 {
-	--tw-gradient-to: var(--color-mint-950);
-}
-
-/* Text, background and border mappings */
-.text-mint-50 {
-	color: var(--color-mint-50);
-}
-
-.text-mint-100 {
-	color: var(--color-mint-100);
-}
-
-.text-mint-200 {
-	color: var(--color-mint-200);
-}
-
-.text-mint-300 {
-	color: var(--color-mint-300);
-}
-
-.text-mint-400 {
-	color: var(--color-mint-400);
-}
-
-.text-mint-500 {
-	color: var(--color-mint-500);
-}
-
-.text-mint-600 {
-	color: var(--color-mint-600);
-}
-
-.text-mint-700 {
-	color: var(--color-mint-700);
-}
-
-.text-mint-800 {
-	color: var(--color-mint-800);
-}
-
-.text-mint-900 {
-	color: var(--color-mint-900);
-}
-
-.text-mint-950 {
-	color: var(--color-mint-950);
-}
-
-.bg-mint-50 {
-	background-color: var(--color-mint-50);
-}
-
-.bg-mint-100 {
-	background-color: var(--color-mint-100);
-}
-
-.bg-mint-200 {
-	background-color: var(--color-mint-200);
-}
-
-.bg-mint-300 {
-	background-color: var(--color-mint-300);
-}
-
-.bg-mint-400 {
-	background-color: var(--color-mint-400);
-}
-
-.bg-mint-500 {
-	background-color: var(--color-mint-500);
-}
-
-.bg-mint-600 {
-	background-color: var(--color-mint-600);
-}
-
-.bg-mint-700 {
-	background-color: var(--color-mint-700);
-}
-
-.bg-mint-800 {
-	background-color: var(--color-mint-800);
-}
-
-.bg-mint-900 {
-	background-color: var(--color-mint-900);
-}
-
-.bg-mint-950 {
-	background-color: var(--color-mint-950);
-}
-
-.border-mint-50 {
-	border-color: var(--color-mint-50);
-}
-
-.border-mint-100 {
-	border-color: var(--color-mint-100);
-}
-
-.border-mint-200 {
-	border-color: var(--color-mint-200);
-}
-
-.border-mint-300 {
-	border-color: var(--color-mint-300);
-}
-
-.border-mint-400 {
-	border-color: var(--color-mint-400);
-}
-
-.border-mint-500 {
-	border-color: var(--color-mint-500);
-}
-
-.border-mint-600 {
-	border-color: var(--color-mint-600);
-}
-
-.border-mint-700 {
-	border-color: var(--color-mint-700);
-}
-
-.border-mint-800 {
-	border-color: var(--color-mint-800);
-}
-
-.border-mint-900 {
-	border-color: var(--color-mint-900);
-}
-
-.border-mint-950 {
-	border-color: var(--color-mint-950);
-}
-
-/* Riptide accent mappings */
-.from-riptide-100 {
-	--tw-gradient-from: var(--color-riptide-100);
-}
-
-.to-riptide-100 {
-	--tw-gradient-to: var(--color-riptide-100);
-}
-
-.text-riptide-300 {
-	color: var(--color-riptide-300);
-}
-
-.text-riptide-400 {
-	color: var(--color-riptide-400);
-}
-
-.text-riptide-500 {
-	color: var(--color-riptide-500);
-}
-
-/* Accent utilities for checkbox accent */
-.accent-mint-300 {
-	accent-color: var(--color-mint-300);
 }
