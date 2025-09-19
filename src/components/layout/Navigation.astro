@@ -102,7 +102,7 @@ const baseClasses = {
   });
 </script>
 
-<nav class={baseClasses.nav} role="navigation" aria-label="Main Navigation">
+<nav id="mobile-menu" class={baseClasses.nav} role="navigation" aria-label="Main Navigation">
   {
     items.map((key: string) => {
       const item = menu[key as keyof typeof menu];
