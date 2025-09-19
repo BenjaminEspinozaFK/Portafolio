@@ -57,10 +57,14 @@ allPosts.sort(
 
   <div
     id="moreProjects"
-    class="absolute bottom-0 left-0 w-full flex justify-center text-center bg-linear-to-t from-[#FBFEFD] dark:from-[#0e0e10] from-55% to-transparent to-100% pb-30 pt-52"
+    class="w-full flex justify-center text-center bg-linear-to-t from-[#FBFEFD] dark:from-[#0e0e10] from-55% to-transparent to-100% py-6"
   >
     <button
-      class="absolute font-bold cursor-pointer text-mint-400 dark:text-mint-100 hover:text-mint-500 dark:hover:text-mint-300 transition-all"
+      id="moreProjectsBtn"
+      aria-controls="containerProjects"
+      aria-expanded="false"
+      class="font-bold cursor-pointer text-mint-400 dark:text-mint-100 hover:text-mint-500 dark:hover:text-mint-300 transition-all"
+      type="button"
     >
       Ver más proyectos...
     </button>
@@ -68,19 +72,38 @@ allPosts.sort(
 </section>
 
 <script>
-  document.querySelector("#moreProjects")?.addEventListener("click", () => {
-    const container = document.querySelector("#containerProjects");
-    const moreProjectsBtn = document.querySelector("#moreProjects");
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('#containerProjects');
+    const btn = document.querySelector('#moreProjectsBtn');
 
-    if (container && moreProjectsBtn) {
-      // Expand container to show all projects
-      container.classList.remove("h-[150vh]");
-      container.classList.remove("h-auto");
-      // Hide the "View More" button after animation completes
-      moreProjectsBtn.classList.add("hidden");
+    if (!container || !btn) return;
+
+    btn.addEventListener('click', () => {
+      // Remove the collapsed constraints so the container can grow
+      container.classList.remove('max-h-[150vh]');
+      container.classList.remove('overflow-hidden');
+
+      // Animate using inline maxHeight based on scrollHeight to avoid sudden jump
+      const full = container.scrollHeight;
+      container.style.maxHeight = full + 'px';
+
+      // After animation, clear the inline maxHeight so layout is natural
       setTimeout(() => {
-        moreProjectsBtn.classList.add("hidden");
-      }, 500);
-    }
+        container.style.maxHeight = '';
+      }, 520);
+
+      // Accessibility + hide the button
+      btn.setAttribute('aria-expanded', 'true');
+      btn.classList.add('hidden');
+
+      // Ensure footer gets pushed down and user sees the newly revealed content
+      setTimeout(() => {
+        try {
+          container.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        } catch (e) {
+          window.scrollTo({ top: container.offsetTop + container.scrollHeight - window.innerHeight + 16, behavior: 'smooth' });
+        }
+      }, 600);
+    });
   });
 </script>
