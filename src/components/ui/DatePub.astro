@@ -1,8 +1,30 @@
 ---
-const { pubDate } = Astro.props;
+const { date, pubDate } = Astro.props;
 
-const formatDate = (date: string) => {
-  return new Date(date).toLocaleDateString('es-ES', {
+const raw = date ?? pubDate;
+
+const parseDate = (value: unknown) => {
+  if (!value && value !== 0) return null;
+  if (value instanceof Date) return value;
+  const s = String(value);
+
+  // ISO-like (YYYY-MM-DD) or common separators
+  if (/^\d{4}[-/.]\d{2}[-/.]\d{2}$/.test(s)) return new Date(s);
+
+  // Plain YYYYMMDD -> convert to YYYY-MM-DD
+  if (/^\d{8}$/.test(s)) {
+    return new Date(`${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6, 8)}`);
+  }
+
+  // Fallback: let Date try to parse
+  const d = new Date(s);
+  return isNaN(d.getTime()) ? null : d;
+};
+
+const parsed = parseDate(raw);
+
+const formatDate = (d: Date) => {
+  return d.toLocaleDateString('es-ES', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
@@ -11,5 +33,5 @@ const formatDate = (date: string) => {
 ---
 
 <time class="text-sm text-zinc-500 dark:text-zinc-400">
-  {formatDate(pubDate)}
+  {parsed ? formatDate(parsed) : 'Fecha desconocida'}
 </time>
