@@ -33,6 +33,10 @@ const jsonDataCollection = defineCollection({
       url: z.string(),
       alt: z.string(),
     }),
+    phone: z.string().optional(),
+    location: z.string().optional(),
+    elevatorPitch: z.string().optional(),
+    competencies: z.array(z.string()).optional(),
   }),
 });
 
