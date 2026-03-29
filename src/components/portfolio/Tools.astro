@@ -1,63 +1,29 @@
 ---
-const allTools = [
-  "html",
-  "javascript",
-  "ts",
-  "angular",
-  "astro",
-  "react",
-  "svelte",
-  "vite",
+// Organized tools by category for better visual presentation
+const toolCategories = {
+  "Frontend": ["html", "javascript", "ts", "react", "angular", "astro", "svelte", "vite"],
+  "Backend": ["node", "express", "nestjs", "python", "rust"],
+  "Estilos": ["css", "tailwind", "bootstrap"],
+  "Bases de Datos": ["mongo", "firebase", "mysql", "postgresql", "prisma", "redis", "jwt"],
+  "DevOps & Tools": ["docker", "git", "github", "linux", "nginx", "vercel", "pnpm"],
+  "Otros": ["figma", "markdown", "php", "wordpress"]
+};
 
-  
-  "node",
-  "express",
-  "nestjs",
-  "python",
-  "rust",
-
-  "css",
-  "tailwind",
-  "bootstrap",
-
-  "docker",
-
-  "mongo",
-  "firebase",
-  "mysql",
-  "postgresql",
-  "prisma",
-  "redis",
-  "jwt",
-
-  "figma",
-  "vercel",
-  "linux",
-  "nginx",
-  "pnpm",
-  
-  
-  "git",
-  "markdown",
-  "github",
-
-  "php",
-  "wordpress",
-
-
-];
+// Flat list for default variant
+const allTools = Object.values(toolCategories).flat();
 
 import Capsule from "../ui/Capsule.astro";
 
-type ToolVariant = "default" | "center";
+type ToolVariant = "default" | "center" | "categorized";
 
 // Base classes that are common to all variants
-const baseClasses = "flex flex-wrap gap-4 max-lg:gap-1 grid-auto-efe";
+const baseClasses = "flex flex-wrap gap-3 max-lg:gap-2";
 
 // Variant-specific classes
 const variantClasses: Record<ToolVariant, string> = {
   default: "cursor-default",
   center: "justify-center cursor-default",
+  categorized: "cursor-default"
 };
 
 const { variant = "default", linkEnabled = false, size = "md" } = Astro.props;
@@ -66,6 +32,21 @@ const { variant = "default", linkEnabled = false, size = "md" } = Astro.props;
 const classes = `${baseClasses} ${variantClasses[variant as ToolVariant]}`;
 ---
 
-<div class={classes}>
-  {allTools.map((tool) => <Capsule lang={tool} linkEnabled={linkEnabled} size={size} />)}
-</div>
+{variant === "categorized" ? (
+  <div class="space-y-6">
+    {Object.entries(toolCategories).map(([category, tools]) => (
+      <div class="space-y-3">
+        <h4 class="text-sm font-semibold text-mint-500 dark:text-mint-400 uppercase tracking-wider">
+          {category}
+        </h4>
+        <div class={classes}>
+          {tools.map((tool) => <Capsule lang={tool} linkEnabled={linkEnabled} size={size} />)}
+        </div>
+      </div>
+    ))}
+  </div>
+) : (
+  <div class={classes}>
+    {allTools.map((tool) => <Capsule lang={tool} linkEnabled={linkEnabled} size={size} />)}
+  </div>
+)}

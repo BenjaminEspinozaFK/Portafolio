@@ -14,32 +14,35 @@ allPosts.sort(
 ---
 
 <section
-  class="bg-linear-to-t dark:from-[#0e0e10] from-white from-50% to-transparent to-100% scroll-m-16 relative pt-8 pb-32 max-2xl:px-8 max-md:pt-4"
+  class="bg-gradient-to-t dark:from-[#0e0e10] from-white from-50% to-transparent to-100% scroll-m-16 relative pt-16 pb-32 max-2xl:px-8 max-md:pt-8"
   id="projects"
 >
   <div class="mx-auto max-w-7xl py-8">
-    <div class="flex gap-4 items-center justify-center text-center">
-      <Icon class="text-3xl dark:text-white text-blacktext" name="code" />
-      <Heading text="Proyectos" textGradient="Realizados" level={2} />
-    </div>
+    <!-- Section Header -->
+    <div class="flex flex-col items-center justify-center text-center gap-4 mb-12">
+      <div class="flex gap-4 items-center">
+        <div class="p-3 rounded-xl bg-mint-200/50 dark:bg-mint-800/30">
+          <Icon class="text-2xl dark:text-mint-300 text-mint-600" name="code" />
+        </div>
+        <Heading text="Proyectos" textGradient="Realizados" level={2} />
+      </div>
 
-    <p
-      class="z-2 text-center mx-auto text-lg max-xl:text-base max-w-2xl dark:text-gray-200 text-blacktext my-6 leading-6 font-medium"
-    >
-      <br /> Aquí muestro algunos de los <b
-        class="bg-linear-to-r from-riptide-500 to-mint-500 dark:from-riptide-300 dark:to-mint-200 text-transparent bg-clip-text"
-        >proyectos</b
-      > en los que he trabajado, aplicando todo el conocimiento posible en nuevas tecnologías para el mejor desarrollo posible.
-      <b
-        class="bg-linear-to-r from-riptide-500 to-mint-500 dark:from-riptide-300 dark:to-mint-200 text-transparent bg-clip-text"
+      <p
+        class="z-2 text-center mx-auto text-lg max-xl:text-base max-w-2xl dark:text-gray-300 text-blacktext/80 leading-relaxed font-medium"
       >
-    </p>
+        Aquí muestro algunos de los <span
+          class="bg-gradient-to-r from-riptide-500 to-mint-500 dark:from-riptide-300 dark:to-mint-200 text-transparent bg-clip-text font-bold"
+          >proyectos</span
+        > en los que he trabajado, aplicando nuevas tecnologías y mejores prácticas de desarrollo.
+      </p>
+    </div>
     <slot />
   </div>
 
+  <!-- Projects Grid -->
   <div
     id="containerProjects"
-    class="mx-auto max-w-7xl grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-5 p-2 py-4 max-h-[150vh] overflow-hidden transition-[max-height] duration-500 ease-in-out"
+    class="mx-auto max-w-7xl grid grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-1 gap-6 p-2 py-4 max-h-[150vh] overflow-hidden transition-[max-height] duration-500 ease-in-out"
   >
     {
       allPosts.map((post) => (
@@ -55,18 +58,22 @@ allPosts.sort(
     }
   </div>
 
+  <!-- Load More Button -->
   <div
     id="moreProjects"
-    class="w-full flex justify-center text-center bg-linear-to-t from-[#FBFEFD] dark:from-[#0e0e10] from-55% to-transparent to-100% py-6"
+    class="w-full flex justify-center text-center bg-gradient-to-t from-[#FBFEFD] dark:from-[#0e0e10] from-55% to-transparent to-100% py-8 mt-4"
   >
     <button
       id="moreProjectsBtn"
       aria-controls="containerProjects"
       aria-expanded="false"
-      class="font-bold cursor-pointer text-mint-400 dark:text-mint-100 hover:text-mint-500 dark:hover:text-mint-300 transition-all"
+      class="group flex items-center gap-2 font-bold cursor-pointer text-mint-500 dark:text-mint-300 hover:text-mint-600 dark:hover:text-mint-200 transition-all duration-300 px-6 py-3 rounded-full border border-mint-300/50 dark:border-mint-600/50 hover:border-mint-400 dark:hover:border-mint-400 hover:bg-mint-50 dark:hover:bg-mint-900/20"
       type="button"
     >
-      Ver más proyectos...
+      <span>Ver más proyectos</span>
+      <svg class="w-5 h-5 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
     </button>
   </div>
 </section>

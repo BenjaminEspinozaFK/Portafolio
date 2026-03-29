@@ -16,11 +16,16 @@ if (!iconName || !link) {
 ---
 
 <a 
-    class="hover:text-mint-300 hover:scale-150 transition-all" 
+    class="group relative hover:text-mint-400 transition-all duration-300 p-2 rounded-lg hover:bg-mint-100/10 dark:hover:bg-mint-800/20" 
     target="_blank" 
     href={link}
     rel="noopener noreferrer"
     aria-label={label}
 >
-    <Icon name={iconName} aria-hidden="true" />
+    <Icon 
+        name={iconName} 
+        aria-hidden="true" 
+        class="transform group-hover:scale-125 transition-transform duration-300"
+    />
+    <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-mint-400 group-hover:w-full transition-all duration-300 rounded-full"></span>
 </a>
