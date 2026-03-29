@@ -4,18 +4,32 @@ const { title, url, image, languages, description, size = "xs" } = Astro.props;
 import Capsule from "../ui/Capsule.astro";
 ---
 
-<a href={url} class="w-full h-full hover:scale-105  transition-all duration-300 ease-in-out rounded-3xl bg-linear-to-br from-mint-50/50 to-mint-300/10 dark:from-zinc-800 dark:to-mint-800/10">
-  <article class="group h-full  gap-4 p-4  max-md:p-6 flex flex-col justify-start items-center cursor-pointer transition-all duration-200 ease-in-out rounded-3xl bg-transparent backdrop-blur-lg hover:backdrop-blur-none  overflow-hidden  hover:shadow-[0_10px_10px_rgba(0,0,0,0.05)] dark:border-0 dark:hover:shadow-[0_10px_10px_rgba(13,188,130,0.05)] before:absolute before:size-36 before:aspect-square before:rounded-full before:blur-3xl dark:before:blur-3xl dark:before:opacity-20 before:opacity-5   before:transition before:-z-1 before:left-7/12 before:bottom-50 xl:before:-bottom-0 before:bg-[radial-gradient(circle,rgba(71,255,194)_0,rgba(0,255,191)_100%)] dark:before:bg-[radial-gradient(circle,rgba(7,255,173)_0,rgba(1,45,34)_100%)] after:absolute after:size-40 after:aspect-square after:rounded-full dark:after:blur-2xl after:blur-3xl dark:after:opacity-20 after:opacity-10 after:transition after:-z-1 after:-left-10 after:top-1/2 after:bg-[radial-gradient(circle,rgba(0,255,217)_0,rgba(121,249,255,65%)_70%)] dark:after:bg-[radial-gradient(circle,rgba(0,255,218)_0,rgba(2,181,190,65%)_70%)]">
-    <div class="overflow-hidden rounded-xl">
-      <img class="h-auto rounded-xl transition-all duration-300 ease-in-out group-hover:scale-105" src={image.url} alt={image.alt} />
+<a href={url} class="group/card w-full h-full block transition-all duration-500 ease-out rounded-3xl bg-gradient-to-br from-mint-50/50 to-mint-300/10 dark:from-zinc-800/80 dark:to-mint-800/10 hover:shadow-2xl hover:shadow-mint-500/10 dark:hover:shadow-mint-400/5">
+  <article class="relative h-full gap-5 p-5 max-md:p-6 flex flex-col justify-start items-center cursor-pointer transition-all duration-500 ease-out rounded-3xl bg-transparent backdrop-blur-lg overflow-hidden border border-transparent hover:border-mint-300/20 dark:hover:border-mint-500/20
+    before:absolute before:size-40 before:aspect-square before:rounded-full before:blur-3xl dark:before:blur-3xl before:opacity-0 group-hover/card:before:opacity-30 dark:group-hover/card:before:opacity-20 before:transition-opacity before:duration-500 before:-z-1 before:left-7/12 before:bottom-50 xl:before:-bottom-0 before:bg-[radial-gradient(circle,rgba(71,255,194)_0,rgba(0,255,191)_100%)] dark:before:bg-[radial-gradient(circle,rgba(7,255,173)_0,rgba(1,45,34)_100%)]
+    after:absolute after:size-44 after:aspect-square after:rounded-full dark:after:blur-2xl after:blur-3xl after:opacity-0 group-hover/card:after:opacity-20 dark:group-hover/card:after:opacity-15 after:transition-opacity after:duration-500 after:-z-1 after:-left-10 after:top-1/2 after:bg-[radial-gradient(circle,rgba(0,255,217)_0,rgba(121,249,255,65%)_70%)] dark:after:bg-[radial-gradient(circle,rgba(0,255,218)_0,rgba(2,181,190,65%)_70%)]">
+    
+    <!-- Image Container -->
+    <div class="overflow-hidden rounded-xl w-full relative">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 z-10 rounded-xl"></div>
+      <img 
+        class="w-full h-48 object-cover rounded-xl transition-all duration-500 ease-out group-hover/card:scale-110" 
+        src={image.url} 
+        alt={image.alt}
+        loading="lazy"
+      />
     </div>
-    <div class="flex flex-col p-2">
-      <div class="flex flex-col gap-3 w-full">
-        <h2 class="text-3xl font-bold text-blacktext dark:text-mint-50">
+    
+    <!-- Content -->
+    <div class="flex flex-col p-2 w-full flex-grow">
+      <div class="flex flex-col gap-4 w-full">
+        <!-- Title with hover effect -->
+        <h2 class="text-2xl font-bold text-blacktext dark:text-mint-50 group-hover/card:text-mint-600 dark:group-hover/card:text-mint-300 transition-colors duration-300">
           {title}
         </h2>
 
-        <div class="flex flex-wrap gap-3">
+        <!-- Technologies -->
+        <div class="flex flex-wrap gap-2">
           {
             languages.map((language: string) => (
               <Capsule size={size} linkEnabled={false} lang={language} />
@@ -23,9 +37,18 @@ import Capsule from "../ui/Capsule.astro";
           }
         </div>
 
-        <p class="text-lg max-xl:text-base w-full max-md:max-w-[85%] my-2 leading-6 font-medium text-blacktext dark:text-gray-200">
+        <!-- Description -->
+        <p class="text-base max-xl:text-sm w-full leading-relaxed font-medium text-blacktext/80 dark:text-gray-300 line-clamp-3">
           {description}
         </p>
+      </div>
+      
+      <!-- View Project indicator -->
+      <div class="mt-auto pt-4 flex items-center gap-2 text-mint-500 dark:text-mint-400 font-semibold text-sm opacity-0 group-hover/card:opacity-100 translate-y-2 group-hover/card:translate-y-0 transition-all duration-300">
+        <span>Ver proyecto</span>
+        <svg class="w-4 h-4 group-hover/card:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
       </div>
     </div>
   </article>

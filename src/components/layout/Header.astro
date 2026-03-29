@@ -6,7 +6,7 @@ import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 
 const [staticData] = await getCollection("staticData");
-const { github, githubIconName, linkedin, linkedinIconName } = staticData.data;
+const { github, githubIconName, linkedin, linkedinIconName, profileName, alias } = staticData.data;
 
 const currentPath = Astro.url.pathname;
 const routes = ["/", "/portfolio", "/about-me"];
@@ -22,11 +22,24 @@ const navItems = isActiveRoute
 <header
   role="banner"
   aria-label="Main navigation"
-  class="sticky top-0 z-50 w-full p-4 font-medium text-blacktext dark:text-zinc-300 dark:bg-[#0E0E11]/80 dark:border-b dark:border-zinc-800 bg-white/90 backdrop-blur-xs dark:backdrop-blur-xs max-md:z-50 max-md:px-0 transition-all"
+  class="sticky top-0 z-50 w-full p-4 font-medium text-blacktext dark:text-zinc-300 dark:bg-[#0E0E11]/90 dark:border-b dark:border-zinc-800/50 bg-white/95 backdrop-blur-md dark:backdrop-blur-md max-md:z-50 max-md:px-0 transition-all shadow-sm dark:shadow-none"
 >
   <div
     class="relative mx-auto flex max-w-7xl flex-row items-center justify-between max-xl:px-6"
   >
+    <!-- Logo/Brand Name -->
+    <a 
+      href="/" 
+      class="group flex items-center gap-2 font-bold text-lg hover:text-mint-400 transition-all duration-300 z-10"
+      aria-label="Ir al inicio"
+    >
+      <span class="relative overflow-hidden">
+        <span class="bg-gradient-to-r from-riptide-400 to-mint-400 bg-clip-text text-transparent">
+          {profileName?.split(' ')[0] || alias || 'Portfolio'}
+        </span>
+      </span>
+      <span class="text-mint-400 text-xl group-hover:rotate-12 transition-transform duration-300">✦</span>
+    </a>
     
     <Navigation items={navItems} />
 

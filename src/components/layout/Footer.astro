@@ -16,28 +16,42 @@ const {
   linkedinIconName,
   instagramIconName,
   githubIconName,
+  profileName,
 } = staticData.data;
+
+const currentYear = new Date().getFullYear();
 ---
 
 <footer
-  class="relative bottom-0 w-full px-4 py-8 font-medium text-blacktext dark:bg-transparent dark:border-b-2 dark:border-zinc-800 dark:text-zinc-300 max-lg:mt-3"
+  class="relative bottom-0 w-full px-4 py-12 font-medium text-blacktext dark:bg-gradient-to-t dark:from-zinc-950 dark:to-transparent border-t border-mint-200/20 dark:border-zinc-800 dark:text-zinc-300"
   role="contentinfo"
   aria-label="Site footer"
 >
-  <nav
-    class="mx-auto flex max-w-7xl flex-col items-center justify-center gap-6 text-xl max-xl:px-6"
-    aria-label="Footer navigation"
+  <div
+    class="mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 max-xl:px-6"
   >
-    <div
-      class="relative h-6 cursor-pointer before:absolute before:left-1/2 before:top-1/2 before:h-full before:w-[40%] before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:bg-[#50fd8f25] before:blur-3xl before:opacity-80 before:-z-1 hover:text-mint-500 transition-all [text-shadow:0_1px_2px_#000]"
+    <!-- Logo/Brand -->
+    <a 
+      href="/" 
+      aria-label="Return to homepage" 
+      class="group flex items-center gap-2 font-bold text-xl hover:text-mint-400 transition-all duration-300"
     >
-      <a href="/" aria-label="Return to homepage" class="font-bold text-lg hover:text-mint-500 transition-all">
-        
-      </a>
-    </div>
-    <div
-      class="flex items-center justify-center gap-15 text-2xl"
-      role="group"
+      <span class="relative">
+        <span class="bg-gradient-to-r from-riptide-400 to-mint-400 bg-clip-text text-transparent group-hover:from-riptide-300 group-hover:to-mint-300 transition-all">
+          {profileName || alias}
+        </span>
+        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-riptide-400 to-mint-400 group-hover:w-full transition-all duration-300"></span>
+      </span>
+      <Icon name="rocket" class="text-mint-400 group-hover:rotate-12 transition-transform duration-300" />
+    </a>
+
+    <!-- Divider -->
+    <div class="w-24 h-px bg-gradient-to-r from-transparent via-mint-400/50 to-transparent"></div>
+
+    <!-- Social Links -->
+    <nav
+      class="flex items-center justify-center gap-6 text-2xl"
+      role="navigation"
       aria-label="Social media links"
     >
       <Social
@@ -65,6 +79,16 @@ const {
         iconName={linkedinIconName}
         label={`Visit ${alias} on LinkedIn`}
       />
+    </nav>
+
+    <!-- Copyright & Credits -->
+    <div class="flex flex-col items-center gap-2 text-sm text-zinc-500 dark:text-zinc-500">
+      <p>
+        © {currentYear} <span class="text-mint-500 dark:text-mint-400 font-medium">{profileName || alias}</span>. Todos los derechos reservados.
+      </p>
+      <p class="flex items-center gap-1">
+        Hecho con <Icon name="astro" class="text-orange-500 size-4" aria-hidden="true" /> Astro y mucho <span class="text-red-400">♥</span>
+      </p>
     </div>
-  </nav>
+  </div>
 </footer>
