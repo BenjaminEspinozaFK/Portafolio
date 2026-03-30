@@ -11,8 +11,9 @@ import Layout from "/src/layouts/Layout.astro";
 
       <!-- Header -->
       <div class="text-center mb-16 max-sm:mb-12">
-        <h1 class="text-5xl max-sm:text-3xl font-bold mb-4 bg-gradient-to-r from-riptide-400 to-mint-300 bg-clip-text text-transparent">
-          📄 Carta de Presentación
+        <h1 class="text-5xl max-sm:text-3xl font-bold mb-4">
+          <span class="text-4xl">📄</span>
+          <span class="bg-gradient-to-r from-riptide-400 to-mint-300 bg-clip-text text-transparent">Carta de Presentación</span>
         </h1>
         <p class="text-lg text-zinc-400">Profesional y personalizable</p>
       </div>
@@ -21,7 +22,7 @@ import Layout from "/src/layouts/Layout.astro";
       <div class="relative">
         <div class="absolute -inset-1 bg-gradient-to-r from-mint-400 to-riptide-400 rounded-3xl blur-2xl opacity-20"></div>
 
-        <div class="relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-mint-400/30 rounded-3xl p-16 max-sm:p-8 shadow-2xl">
+        <div id="cartaContent" class="relative bg-gradient-to-br from-zinc-900 to-zinc-950 border border-mint-400/30 rounded-3xl p-16 max-sm:p-8 shadow-2xl">
 
           <!-- Fecha y datos -->
           <div class="mb-8 text-right">
@@ -189,13 +190,19 @@ import Layout from "/src/layouts/Layout.astro";
 
       <!-- Botones de Descarga -->
       <div class="text-center mt-12 max-sm:mt-8">
-        <p class="text-zinc-400 mb-6">Opciones de descarga (próximamente)</p>
+        <p class="text-zinc-400 mb-6">Descarga tu carta de presentación</p>
         <div class="flex gap-4 justify-center flex-wrap">
-          <button onclick="alert('Funcionalidad en desarrollo')" class="px-8 py-3 bg-gradient-to-r from-mint-600 to-mint-500 hover:from-mint-700 hover:to-mint-600 text-white rounded-lg font-semibold transition-all transform hover:scale-105">
-            📥 Descargar PDF
+          <button 
+            id="downloadPDF"
+            class="px-8 py-3 bg-gradient-to-r from-mint-600 to-mint-500 hover:from-mint-700 hover:to-mint-600 text-white rounded-lg font-semibold transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <span id="pdfText">📥 Descargar PDF</span>
           </button>
-          <button onclick="alert('Funcionalidad en desarrollo')" class="px-8 py-3 bg-gradient-to-r from-riptide-600 to-riptide-500 hover:from-riptide-700 hover:to-riptide-600 text-white rounded-lg font-semibold transition-all transform hover:scale-105">
-            📋 Personalizar
+          <button 
+            id="downloadPNG"
+            class="px-8 py-3 bg-gradient-to-r from-riptide-600 to-riptide-500 hover:from-riptide-700 hover:to-riptide-600 text-white rounded-lg font-semibold transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <span id="pngText">📥 Descargar PNG</span>
           </button>
         </div>
       </div>
@@ -203,3 +210,275 @@ import Layout from "/src/layouts/Layout.astro";
     </div>
   </section>
 </Layout>
+
+<script>
+  import { toPng, toBlob } from 'html-to-image';
+  import jsPDF from 'jspdf';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const downloadPDF = document.getElementById('downloadPDF') as HTMLButtonElement;
+    const downloadPNG = document.getElementById('downloadPNG') as HTMLButtonElement;
+    const pdfText = document.getElementById('pdfText') as HTMLSpanElement;
+    const pngText = document.getElementById('pngText') as HTMLSpanElement;
+
+    // Función para descargar como PDF
+    downloadPDF?.addEventListener('click', async () => {
+      try {
+        downloadPDF.disabled = true;
+        pdfText.textContent = '⏳ Generando PDF...';
+
+        const element = document.getElementById('cartaContent') as HTMLElement;
+        if (!element) {
+          throw new Error('No se encontró el elemento');
+        }
+
+        // Clonar elemento para no afectar el original
+        const clone = element.cloneNode(true) as HTMLElement;
+        
+        // Reemplazar emojis con texto más grande y color
+        const replaceEmojis = (node: HTMLElement) => {
+          const walker = document.createTreeWalker(
+            node,
+            NodeFilter.SHOW_TEXT,
+            null
+          );
+          
+          const textNodes: Text[] = [];
+          let currentNode;
+          
+          while (currentNode = walker.nextNode()) {
+            textNodes.push(currentNode as Text);
+          }
+          
+          textNodes.forEach((textNode) => {
+            const text = textNode.textContent || '';
+            // Si contiene emojis, envolver en span con estilos especiales
+            if (/[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/u.test(text)) {
+              const span = document.createElement('span');
+              span.textContent = text;
+              span.style.fontSize = '1.2em';
+              span.style.fontFamily = '"Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif';
+              span.style.display = 'inline-block';
+              span.style.lineHeight = '1';
+              textNode.parentNode?.replaceChild(span, textNode);
+            }
+          });
+        };
+        
+        replaceEmojis(clone);
+        
+        // Crear contenedor temporal fuera de vista
+        const tempContainer = document.createElement('div');
+        tempContainer.style.position = 'fixed';
+        tempContainer.style.left = '-9999px';
+        tempContainer.style.top = '0';
+        tempContainer.style.width = element.offsetWidth + 'px';
+        tempContainer.appendChild(clone);
+        document.body.appendChild(tempContainer);
+
+        // Esperar a que se renderice
+        await new Promise(resolve => setTimeout(resolve, 200));
+
+        // Generar imagen PNG con html-to-image (soporta oklch)
+        const dataUrl = await toPng(clone, {
+          quality: 1,
+          pixelRatio: 3,
+          backgroundColor: '#18181b',
+          cacheBust: true,
+          skipFonts: false,
+          preferredFontFormat: 'woff2'
+        });
+        
+        // Limpiar contenedor temporal
+        document.body.removeChild(tempContainer);
+
+        // Crear PDF
+        const pdf = new jsPDF({
+          orientation: 'portrait',
+          unit: 'mm',
+          format: 'a4'
+        });
+
+        const img = new Image();
+        img.src = dataUrl;
+        
+        await new Promise((resolve) => {
+          img.onload = resolve;
+        });
+
+        // Dimensiones de página A4
+        const pageWidth = 210;
+        const pageHeight = 297;
+        const margin = 15; // Margen de 15mm
+        
+        // Ancho disponible con márgenes
+        const availableWidth = pageWidth - (margin * 2);
+        
+        // Calcular altura proporcional
+        const imgWidth = availableWidth;
+        const imgHeight = (img.height * imgWidth) / img.width;
+        
+        // Calcular cuántas páginas necesitamos
+        const availablePageHeight = pageHeight - (margin * 2);
+        const totalPages = Math.ceil(imgHeight / availablePageHeight);
+        
+        // Agregar páginas
+        for (let page = 0; page < totalPages; page++) {
+          if (page > 0) {
+            pdf.addPage();
+          }
+          
+          // Calcular qué parte de la imagen va en esta página
+          const sourceY = (page * availablePageHeight * img.height) / imgHeight;
+          const sourceHeight = Math.min(
+            (availablePageHeight * img.height) / imgHeight,
+            img.height - sourceY
+          );
+          
+          // Crear un canvas temporal para esta sección
+          const tempCanvas = document.createElement('canvas');
+          const ctx = tempCanvas.getContext('2d');
+          
+          tempCanvas.width = img.width;
+          tempCanvas.height = sourceHeight;
+          
+          if (ctx) {
+            ctx.drawImage(
+              img,
+              0, sourceY,           // Posición de origen en la imagen
+              img.width, sourceHeight, // Tamaño de origen
+              0, 0,                 // Posición de destino en canvas
+              img.width, sourceHeight  // Tamaño de destino
+            );
+            
+            const pageImageData = tempCanvas.toDataURL('image/png');
+            const pageImageHeight = (sourceHeight * imgWidth) / img.width;
+            
+            pdf.addImage(
+              pageImageData,
+              'PNG',
+              margin,
+              margin,
+              imgWidth,
+              pageImageHeight,
+              undefined,
+              'FAST'
+            );
+          }
+        }
+
+        pdf.save('Carta-Presentacion-Benjamin-Espinoza.pdf');
+
+        pdfText.textContent = '✅ PDF descargado';
+        setTimeout(() => {
+          pdfText.textContent = '📥 Descargar PDF';
+          downloadPDF.disabled = false;
+        }, 2000);
+      } catch (error) {
+        console.error('Error al generar PDF:', error);
+        alert('Error al generar PDF: ' + (error as Error).message);
+        pdfText.textContent = '❌ Error';
+        setTimeout(() => {
+          pdfText.textContent = '📥 Descargar PDF';
+          downloadPDF.disabled = false;
+        }, 2000);
+      }
+    });
+
+    // Función para descargar como PNG
+    downloadPNG?.addEventListener('click', async () => {
+      try {
+        downloadPNG.disabled = true;
+        pngText.textContent = '⏳ Generando PNG...';
+
+        const element = document.getElementById('cartaContent') as HTMLElement;
+        if (!element) {
+          throw new Error('No se encontró el elemento');
+        }
+
+        // Clonar elemento para no afectar el original
+        const clone = element.cloneNode(true) as HTMLElement;
+        
+        // Reemplazar emojis con texto más grande y color
+        const replaceEmojis = (node: HTMLElement) => {
+          const walker = document.createTreeWalker(
+            node,
+            NodeFilter.SHOW_TEXT,
+            null
+          );
+          
+          const textNodes: Text[] = [];
+          let currentNode;
+          
+          while (currentNode = walker.nextNode()) {
+            textNodes.push(currentNode as Text);
+          }
+          
+          textNodes.forEach((textNode) => {
+            const text = textNode.textContent || '';
+            // Si contiene emojis, envolver en span con estilos especiales
+            if (/[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/u.test(text)) {
+              const span = document.createElement('span');
+              span.textContent = text;
+              span.style.fontSize = '1.2em';
+              span.style.fontFamily = '"Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif';
+              span.style.display = 'inline-block';
+              span.style.lineHeight = '1';
+              textNode.parentNode?.replaceChild(span, textNode);
+            }
+          });
+        };
+        
+        replaceEmojis(clone);
+        
+        // Crear contenedor temporal fuera de vista
+        const tempContainer = document.createElement('div');
+        tempContainer.style.position = 'fixed';
+        tempContainer.style.left = '-9999px';
+        tempContainer.style.top = '0';
+        tempContainer.style.width = element.offsetWidth + 'px';
+        tempContainer.appendChild(clone);
+        document.body.appendChild(tempContainer);
+
+        // Esperar a que se renderice
+        await new Promise(resolve => setTimeout(resolve, 200));
+
+        // Generar blob PNG con html-to-image (soporta oklch)
+        const blob = await toBlob(clone, {
+          quality: 1,
+          pixelRatio: 3,
+          backgroundColor: '#18181b',
+          cacheBust: true,
+          skipFonts: false,
+          preferredFontFormat: 'woff2'
+        });
+        
+        // Limpiar contenedor temporal
+        document.body.removeChild(tempContainer);
+
+        if (blob) {
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.download = 'Carta-Presentacion-Benjamin-Espinoza.png';
+          link.href = url;
+          link.click();
+          URL.revokeObjectURL(url);
+
+          pngText.textContent = '✅ PNG descargado';
+          setTimeout(() => {
+            pngText.textContent = '🖼️ Descargar PNG';
+            downloadPNG.disabled = false;
+          }, 2000);
+        }
+      } catch (error) {
+        console.error('Error al generar PNG:', error);
+        alert('Error al generar PNG: ' + (error as Error).message);
+        pngText.textContent = '❌ Error';
+        setTimeout(() => {
+          pngText.textContent = '🖼️ Descargar PNG';
+          downloadPNG.disabled = false;
+        }, 2000);
+      }
+    });
+  });
+</script>
