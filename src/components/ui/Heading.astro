@@ -9,12 +9,17 @@ interface Props {
 const { text = "", textGradient = "", level = 1, className = "" } = Astro.props;
 
 const Tag = `h${level}`;
+
+const sizeClasses = {
+    1: "text-5xl max-xl:text-4xl max-md:text-3xl",
+    2: "text-4xl max-xl:text-3xl max-md:text-2xl",
+    3: "text-3xl max-xl:text-2xl max-md:text-xl"
+};
 ---
 
 <Tag class:list={[
-    "font-extrabold text-4xl max-xl:text-3xl",
-    level === 2 && "max-md:text-3xl ",
-    level === 3 && "max-md:text-xl ",
+    "font-extrabold tracking-tight",
+    sizeClasses[level],
     "dark:text-white text-blacktext",
     className
 ]}>
@@ -25,11 +30,8 @@ const Tag = `h${level}`;
         </> 
     )}
     {textGradient && (
-        <b
-            class:list={[
-                "bg-linear-to-r from-riptide-500 to-mint-400 dark:from-riptide-500 dark:to-mint-500 text-transparent bg-clip-text",
-                level === 1 
-            ]}
-        >{textGradient}</b>
+        <span
+            class="bg-gradient-to-r from-riptide-400 to-mint-400 dark:from-riptide-400 dark:to-mint-400 text-transparent bg-clip-text"
+        >{textGradient}</span>
     )}
 </Tag> 
