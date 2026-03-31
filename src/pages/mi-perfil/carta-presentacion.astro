@@ -1,5 +1,9 @@
 ---
 import Layout from "/src/layouts/Layout.astro";
+
+const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+const fecha = new Date();
+const fechaFormateada = `Temuco, ${meses[fecha.getMonth()]} ${fecha.getFullYear()}`;
 ---
 
 <Layout
@@ -12,7 +16,6 @@ import Layout from "/src/layouts/Layout.astro";
       <!-- Header -->
       <div class="text-center mb-16 max-sm:mb-12">
         <h1 class="text-5xl max-sm:text-3xl font-bold mb-4">
-          <span class="text-4xl">📄</span>
           <span class="bg-gradient-to-r from-riptide-400 to-mint-300 bg-clip-text text-transparent">Carta de Presentación</span>
         </h1>
         <p class="text-lg text-zinc-400">Profesional y personalizable</p>
@@ -26,7 +29,7 @@ import Layout from "/src/layouts/Layout.astro";
 
           <!-- Fecha y datos -->
           <div class="mb-8 text-right">
-            <p class="text-sm text-zinc-400">Temuco, 28 de Marzo de 2026</p>
+            <p class="text-sm text-zinc-400">{fechaFormateada}</p>
           </div>
 
           <!-- Saludo -->
@@ -47,7 +50,7 @@ import Layout from "/src/layouts/Layout.astro";
 
             <!-- Tecnologías en cuadro -->
             <div class="bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-6 mb-6">
-              <p class="text-sm font-bold text-mint-300 uppercase tracking-wider mb-4">🛠️ Stack Tecnológico</p>
+              <p class="text-sm font-bold text-mint-300 uppercase tracking-wider mb-4">Stack Tecnológico</p>
               <div class="grid grid-cols-2 grid-cols-1 md:grid-cols-2 gap-3 text-sm text-zinc-300">
                 <div>
                   <p class="font-semibold text-mint-300 mb-2">Frontend</p>
@@ -71,66 +74,39 @@ import Layout from "/src/layouts/Layout.astro";
 
           <!-- Diferencial -->
           <div class="mb-8">
-            <h3 class="text-lg font-bold text-mint-300 mb-4">✨ ¿Por Qué Me Diferencia?</h3>
+            <h3 class="text-lg font-bold text-mint-300 mb-4">¿Por Qué Me Diferencia?</h3>
             <p class="text-base leading-relaxed text-zinc-300 mb-6">
               Mi valor diferencial no es solo <span class="font-bold text-white">automatizar procesos</span>, sino <span class="font-bold text-white">integrar inteligencia artificial</span> en cada solución para que sean:
             </p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="flex gap-3 p-4 bg-mint-500/10 border border-mint-400/30 rounded-lg">
-                <span class="text-2xl">📊</span>
-                <div>
-                  <p class="font-semibold text-mint-300">Adaptables</p>
-                  <p class="text-xs text-zinc-400">Aprenden y mejoran continuamente</p>
-                </div>
+              <div class="p-4 bg-mint-500/10 border border-mint-400/30 rounded-lg">
+                <p class="font-semibold text-mint-300">Adaptables</p>
+                <p class="text-xs text-zinc-400">Aprenden y mejoran continuamente</p>
               </div>
-              <div class="flex gap-3 p-4 bg-riptide-500/10 border border-riptide-400/30 rounded-lg">
-                <span class="text-2xl">🔧</span>
-                <div>
-                  <p class="font-semibold text-riptide-300">Escalables</p>
-                  <p class="text-xs text-zinc-400">Crecen con necesidades de la org</p>
-                </div>
+              <div class="p-4 bg-riptide-500/10 border border-riptide-400/30 rounded-lg">
+                <p class="font-semibold text-riptide-300">Escalables</p>
+                <p class="text-xs text-zinc-400">Crecen con necesidades de la organización</p>
               </div>
-              <div class="flex gap-3 p-4 bg-green-500/10 border border-green-400/30 rounded-lg">
-                <span class="text-2xl">🛡️</span>
-                <div>
-                  <p class="font-semibold text-green-300">Seguras</p>
-                  <p class="text-xs text-zinc-400">Mejores prácticas de seguridad</p>
-                </div>
+              <div class="p-4 bg-green-500/10 border border-green-400/30 rounded-lg">
+                <p class="font-semibold text-green-300">Seguras</p>
+                <p class="text-xs text-zinc-400">Mejores prácticas de seguridad</p>
               </div>
-              <div class="flex gap-3 p-4 bg-amber-500/10 border border-amber-400/30 rounded-lg">
-                <span class="text-2xl">📈</span>
-                <div>
-                  <p class="font-semibold text-amber-300">Inteligentes</p>
-                  <p class="text-xs text-zinc-400">Generan decisiones basadas en datos</p>
-                </div>
+              <div class="p-4 bg-amber-500/10 border border-amber-400/30 rounded-lg">
+                <p class="font-semibold text-amber-300">Inteligentes</p>
+                <p class="text-xs text-zinc-400">Generan decisiones basadas en datos</p>
               </div>
             </div>
           </div>
 
           <!-- Experiencia -->
           <div class="mb-8">
-            <h3 class="text-lg font-bold text-riptide-300 mb-4">💼 Experiencia Destacada</h3>
-            <ul class="space-y-3 text-base text-zinc-300">
-              <li class="flex gap-3 items-start">
-                <span class="text-riptide-400 font-bold">✅</span>
-                <span>Desarrollo de <span class="font-semibold">arquitecturas limpias</span> y mantenibles</span>
-              </li>
-              <li class="flex gap-3 items-start">
-                <span class="text-riptide-400 font-bold">✅</span>
-                <span>Implementación de <span class="font-semibold">APIs REST</span> con documentación Swagger/OpenAPI</span>
-              </li>
-              <li class="flex gap-3 items-start">
-                <span class="text-riptide-400 font-bold">✅</span>
-                <span><span class="font-semibold">Ayudante de Diseño de Software</span> compartiendo principios SOLID y patrones</span>
-              </li>
-              <li class="flex gap-3 items-start">
-                <span class="text-riptide-400 font-bold">✅</span>
-                <span>Experiencia con <span class="font-semibold">testing automatizado</span> y TDD</span>
-              </li>
-              <li class="flex gap-3 items-start">
-                <span class="text-riptide-400 font-bold">✅</span>
-                <span>Gestión de <span class="font-semibold">proyectos ágiles</span> y trabajo colaborativo</span>
-              </li>
+            <h3 class="text-lg font-bold text-riptide-300 mb-4">Experiencia Destacada</h3>
+            <ul class="space-y-2 text-base text-zinc-300 list-disc list-inside">
+              <li>Desarrollo de <span class="font-semibold">arquitecturas limpias</span> y mantenibles</li>
+              <li>Implementación de <span class="font-semibold">APIs REST</span> con documentación Swagger/OpenAPI</li>
+              <li><span class="font-semibold">Ayudante de Diseño de Software</span> compartiendo principios SOLID y patrones</li>
+              <li>Experiencia con <span class="font-semibold">testing automatizado</span> y TDD</li>
+              <li>Gestión de <span class="font-semibold">proyectos ágiles</span> y trabajo colaborativo</li>
             </ul>
           </div>
 
@@ -138,17 +114,17 @@ import Layout from "/src/layouts/Layout.astro";
           <div class="mb-8 p-6 bg-gradient-to-r from-mint-500/10 to-riptide-500/10 border border-mint-400/30 rounded-lg">
             <p class="text-sm font-bold text-mint-300 uppercase tracking-wider mb-3">Competencias Clave</p>
             <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-mint-500/20 text-mint-300 rounded-full text-sm font-medium">🤖 Automatización</span>
-              <span class="px-3 py-1 bg-riptide-500/20 text-riptide-300 rounded-full text-sm font-medium">🛡️ Ciberseguridad</span>
-              <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm font-medium">🧠 IA/ML</span>
-              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium">💻 Full Stack</span>
-              <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm font-medium">📈 Escalabilidad</span>
+              <span class="px-3 py-1 bg-mint-500/20 text-mint-300 rounded-full text-sm font-medium">Automatización</span>
+              <span class="px-3 py-1 bg-riptide-500/20 text-riptide-300 rounded-full text-sm font-medium">Ciberseguridad</span>
+              <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm font-medium">IA/ML</span>
+              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-sm font-medium">Full Stack</span>
+              <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm font-medium">Escalabilidad</span>
             </div>
           </div>
 
           <!-- Contacto -->
           <div class="mb-8">
-            <h3 class="text-lg font-bold text-mint-300 mb-4">📍 Contacto</h3>
+            <h3 class="text-lg font-bold text-mint-300 mb-4">Contacto</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-base text-zinc-300">
               <div>
                 <p class="text-sm text-zinc-400 font-semibold">Email</p>
@@ -196,13 +172,13 @@ import Layout from "/src/layouts/Layout.astro";
             id="downloadPDF"
             class="px-8 py-3 bg-gradient-to-r from-mint-600 to-mint-500 hover:from-mint-700 hover:to-mint-600 text-white rounded-lg font-semibold transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <span id="pdfText">📥 Descargar PDF</span>
+            <span id="pdfText">Descargar PDF</span>
           </button>
           <button 
             id="downloadPNG"
             class="px-8 py-3 bg-gradient-to-r from-riptide-600 to-riptide-500 hover:from-riptide-700 hover:to-riptide-600 text-white rounded-lg font-semibold transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <span id="pngText">📥 Descargar PNG</span>
+            <span id="pngText">Descargar PNG</span>
           </button>
         </div>
       </div>
@@ -225,7 +201,7 @@ import Layout from "/src/layouts/Layout.astro";
     downloadPDF?.addEventListener('click', async () => {
       try {
         downloadPDF.disabled = true;
-        pdfText.textContent = '⏳ Generando PDF...';
+        pdfText.textContent = 'Generando PDF...';
 
         const element = document.getElementById('cartaContent') as HTMLElement;
         if (!element) {
@@ -285,8 +261,7 @@ import Layout from "/src/layouts/Layout.astro";
           pixelRatio: 3,
           backgroundColor: '#18181b',
           cacheBust: true,
-          skipFonts: false,
-          preferredFontFormat: 'woff2'
+          skipFonts: true
         });
         
         // Limpiar contenedor temporal
@@ -369,17 +344,17 @@ import Layout from "/src/layouts/Layout.astro";
 
         pdf.save('Carta-Presentacion-Benjamin-Espinoza.pdf');
 
-        pdfText.textContent = '✅ PDF descargado';
+        pdfText.textContent = 'PDF descargado';
         setTimeout(() => {
-          pdfText.textContent = '📥 Descargar PDF';
+          pdfText.textContent = 'Descargar PDF';
           downloadPDF.disabled = false;
         }, 2000);
       } catch (error) {
         console.error('Error al generar PDF:', error);
         alert('Error al generar PDF: ' + (error as Error).message);
-        pdfText.textContent = '❌ Error';
+        pdfText.textContent = 'Error';
         setTimeout(() => {
-          pdfText.textContent = '📥 Descargar PDF';
+          pdfText.textContent = 'Descargar PDF';
           downloadPDF.disabled = false;
         }, 2000);
       }
@@ -389,7 +364,7 @@ import Layout from "/src/layouts/Layout.astro";
     downloadPNG?.addEventListener('click', async () => {
       try {
         downloadPNG.disabled = true;
-        pngText.textContent = '⏳ Generando PNG...';
+        pngText.textContent = 'Generando PNG...';
 
         const element = document.getElementById('cartaContent') as HTMLElement;
         if (!element) {
@@ -449,8 +424,7 @@ import Layout from "/src/layouts/Layout.astro";
           pixelRatio: 3,
           backgroundColor: '#18181b',
           cacheBust: true,
-          skipFonts: false,
-          preferredFontFormat: 'woff2'
+          skipFonts: true
         });
         
         // Limpiar contenedor temporal
@@ -464,18 +438,18 @@ import Layout from "/src/layouts/Layout.astro";
           link.click();
           URL.revokeObjectURL(url);
 
-          pngText.textContent = '✅ PNG descargado';
+          pngText.textContent = 'PNG descargado';
           setTimeout(() => {
-            pngText.textContent = '🖼️ Descargar PNG';
+            pngText.textContent = 'Descargar PNG';
             downloadPNG.disabled = false;
           }, 2000);
         }
       } catch (error) {
         console.error('Error al generar PNG:', error);
         alert('Error al generar PNG: ' + (error as Error).message);
-        pngText.textContent = '❌ Error';
+        pngText.textContent = 'Error';
         setTimeout(() => {
-          pngText.textContent = '🖼️ Descargar PNG';
+          pngText.textContent = 'Descargar PNG';
           downloadPNG.disabled = false;
         }, 2000);
       }
