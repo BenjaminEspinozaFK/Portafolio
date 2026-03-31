@@ -31,8 +31,9 @@ const baseClasses = {
   link: "px-2 py-2 transition-all hover:text-mint-300 max-md:mx-auto max-md:w-full max-md:px-6 max-md:py-2 ",
   socialContainer: "flex items-center justify-center gap-5 md:hidden",
   dropdown: "relative group flex items-center",
+  dropdownToggle: "px-2 py-2 transition-all hover:text-mint-300 max-md:mx-auto max-md:w-full max-md:px-6 max-md:py-2 cursor-pointer flex items-center gap-1",
   dropdownMenu:
-    "absolute left-0 top-full hidden group-hover:block bg-white dark:bg-zinc-800 shadow-lg rounded-md py-2 min-w-[200px] z-50",
+    "absolute left-0 top-full bg-white dark:bg-zinc-800 shadow-lg rounded-md py-2 min-w-[200px] z-50 hidden md:group-hover:block",
   dropdownItem:
     "block px-4 py-2 text-sm hover:bg-mint-100 dark:hover:bg-zinc-700 transition-colors",
 } as const;
@@ -106,8 +107,37 @@ const baseClasses = {
       sections.forEach((section) => observer.observe(section));
     }
 
+    // Mobile dropdown toggle
+    function setupMobileDropdown() {
+      const dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
+      
+      dropdownToggles.forEach((toggle) => {
+        toggle.addEventListener('click', (e) => {
+          // Only handle on mobile (check if touch device or small screen)
+          if (window.innerWidth < 768) {
+            e.preventDefault();
+            const menu = toggle.nextElementSibling as HTMLElement;
+            if (menu) {
+              menu.classList.toggle('hidden');
+            }
+          }
+        });
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (!target.closest('[data-dropdown-toggle]') && !target.closest('.dropdown-menu')) {
+          document.querySelectorAll('.dropdown-menu').forEach((menu) => {
+            menu.classList.add('hidden');
+          });
+        }
+      });
+    }
+
     updateActiveLink();
     setupScrollSpy();
+    setupMobileDropdown();
     window.addEventListener("hashchange", updateActiveLink);
   });
 </script>
@@ -121,18 +151,19 @@ const baseClasses = {
       if ("dropdown" in item) {
         return (
           <div class={baseClasses.dropdown}>
-            <a
-              href={item.path}
-              class={baseClasses.link}
-              data-path={item.path}
+            <button
+              type="button"
+              class={baseClasses.dropdownToggle}
+              data-dropdown-toggle
               aria-label={item.name}
-              aria-current={
-                item.path === Astro.url.pathname ? "page" : undefined
-              }
+              aria-expanded="false"
             >
               {item.name}
-            </a>
-            <div class={baseClasses.dropdownMenu}>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class={`${baseClasses.dropdownMenu} dropdown-menu`}>
               {item.dropdown.map((dropdownItem) => (
                 <a
                   href={dropdownItem.path}
