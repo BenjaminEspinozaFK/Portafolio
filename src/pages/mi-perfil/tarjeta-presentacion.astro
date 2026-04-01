@@ -16,8 +16,9 @@ import Layout from "/src/layouts/Layout.astro";
           <!-- Header -->
           <div class="flex items-center justify-between">
             <div>
-              <h2 class="text-2xl font-bold text-white">Benjamin Espinoza</h2>
+              <h2 class="text-2xl font-bold text-white">Benjamin Espinoza Parra</h2>
               <p class="text-riptide-300 font-semibold text-sm">Full Stack Developer</p>
+              <p class="text-zinc-400 text-xs mt-1">Ing. Civil Informática · UCTemuco</p>
             </div>
             <div class="w-16 h-16 rounded-full bg-gradient-to-br from-riptide-400 to-mint-400 p-[2px]">
               <img src="/images/berserk.jpg" alt="Benjamin Espinoza" class="w-full h-full rounded-full object-cover" />
@@ -30,6 +31,7 @@ import Layout from "/src/layouts/Layout.astro";
           <!-- Especialidad -->
           <div>
             <p class="text-xs text-zinc-400 uppercase tracking-widest font-semibold">Especialidad</p>
+            <p class="text-mint-200 font-semibold mt-1">Desarrollo Full Stack & Arquitectura de Software</p>
             <p class="text-mint-200 font-semibold mt-1">Automatización de Procesos + IA</p>
           </div>
 
@@ -172,6 +174,31 @@ import Layout from "/src/layouts/Layout.astro";
         });
 
         pdf.addImage(dataUrl, 'PNG', 0, 0, imgWidthMm, imgHeightMm);
+
+        // Obtener posiciones de los links sociales en el elemento original
+        const socialLinks = element.querySelectorAll('a[href]');
+        const elementRect = element.getBoundingClientRect();
+        
+        // Escala entre el elemento y el PDF
+        const scaleX = imgWidthMm / elementRect.width;
+        const scaleY = imgHeightMm / elementRect.height;
+
+        socialLinks.forEach((link) => {
+          const linkRect = link.getBoundingClientRect();
+          const href = link.getAttribute('href');
+          
+          if (href && (href.startsWith('http') || href.startsWith('mailto:'))) {
+            // Calcular posición relativa al elemento padre
+            const relX = (linkRect.left - elementRect.left) * scaleX;
+            const relY = (linkRect.top - elementRect.top) * scaleY;
+            const linkWidth = linkRect.width * scaleX;
+            const linkHeight = linkRect.height * scaleY;
+
+            // Añadir link clickeable al PDF
+            pdf.link(relX, relY, linkWidth, linkHeight, { url: href });
+          }
+        });
+
         pdf.save('Tarjeta-Benjamin-Espinoza.pdf');
 
         pdfText.textContent = 'Descargado';
