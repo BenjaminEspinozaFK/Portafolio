@@ -30,10 +30,10 @@ const baseClasses = {
   nav: "nav-links flex w-full justify-center gap-6 max-md:gap-3 max-md:py-6",
   link: "px-2 py-2 transition-all hover:text-mint-300 max-md:mx-auto max-md:w-full max-md:px-6 max-md:py-2 ",
   socialContainer: "flex items-center justify-center gap-5 md:hidden",
-  dropdown: "relative group flex items-center",
-  dropdownToggle: "px-2 py-2 transition-all hover:text-mint-300 max-md:mx-auto max-md:w-full max-md:px-6 max-md:py-2 cursor-pointer flex items-center gap-1",
+  dropdown: "relative group flex items-center max-md:w-full max-md:justify-center",
+  dropdownToggle: "px-2 py-2 transition-all hover:text-mint-300 max-md:mx-auto max-md:px-6 max-md:py-2 cursor-pointer flex items-center gap-1",
   dropdownMenu:
-    "absolute left-0 top-full bg-white dark:bg-zinc-800 shadow-lg rounded-md py-2 min-w-[200px] z-50 hidden md:group-hover:block",
+    "absolute left-0 top-full bg-white dark:bg-zinc-800 shadow-lg rounded-md py-2 min-w-[200px] z-50 hidden md:group-hover:block max-md:left-1/2 max-md:-translate-x-1/2",
   dropdownItem:
     "block px-4 py-2 text-sm hover:bg-mint-100 dark:hover:bg-zinc-700 transition-colors",
 } as const;
